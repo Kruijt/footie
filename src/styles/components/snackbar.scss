@@ -1,0 +1,9 @@
+@use '@angular/material' as mat;
+
+@use 'core/theme' as *;
+
+.mdc-snackbar.snackbar-alert {
+  --mat-snack-bar-button-color: #{mat.get-theme-color($theme, neutral-variant, 90)};
+  --mdc-snackbar-supporting-text-color: --mat-app-text-color;
+  --mdc-snackbar-container-color: #{mat.get-theme-color($theme, error, 60)};
+}

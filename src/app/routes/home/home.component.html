@@ -1,0 +1,46 @@
+<div class="home b-fx-col">
+    <mat-toolbar class="b-fx-none b-fx b-fx-between-center">
+        <button mat-icon-button (click)="sidenavOpen = !sidenavOpen">
+            <mat-icon>menu</mat-icon>
+        </button>
+
+        @if (avatar$ | async; as avatar) {
+            <img [src]="avatar" class="avatar" alt="" [matMenuTriggerFor]="userMenu" />
+
+            <mat-menu #userMenu>
+                <button mat-menu-item (click)="onLogout()">Logout</button>
+            </mat-menu>
+        }
+    </mat-toolbar>
+
+    <mat-sidenav-container class="b-fx-flex" #sideNav>
+        <mat-sidenav [(opened)]="sidenavOpen">
+            <div class="home-sidenav b-fx-col b-fx-flex">
+                <mat-nav-list class="b-fx-flex" (click)="sideNav.close()">
+                    <a mat-list-item routerLink="search" routerLinkActive>
+                        <mat-icon matListItemIcon>dashboard</mat-icon>
+                        <span matListItemTitle>Dashboard</span>
+                    </a>
+
+                    <a mat-list-item routerLink="stats" routerLinkActive (click)="sideNav.close()">
+                        <mat-icon matListItemIcon>analytics</mat-icon>
+                        <span matListItemTitle>Statistics</span>
+                    </a>
+                </mat-nav-list>
+
+                <mat-divider class="b-fx-none"></mat-divider>
+
+                <mat-nav-list class="b-fx-none" (click)="sideNav.close()">
+                    <a mat-list-item routerLink="settings" routerLinkActive>
+                        <mat-icon matListItemIcon>settings</mat-icon>
+                        <span matListItemTitle>Settings</span>
+                    </a>
+                </mat-nav-list>
+            </div>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

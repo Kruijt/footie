@@ -1,0 +1,13 @@
+@use 'sass:meta';
+
+@include meta.load-css('core/material');
+@include meta.load-css('core/theme');
+@include meta.load-css('core/reset');
+@include meta.load-css('core/scrollbar');
+
+@include meta.load-css('layout/flex-grid');
+
+@include meta.load-css('components/dialog');
+@include meta.load-css('components/list');
+@include meta.load-css('components/sidenav');
+@include meta.load-css('components/snackbar');

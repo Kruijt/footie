@@ -1,0 +1,139 @@
+// Flex Container
+
+@function parse-align($align) {
+  $align: if($align == start, flex-start, $align);
+  $align: if($align == end, flex-end, $align);
+  $align: if($align == around, space-around, $align);
+  $align: if($align == between, space-between, $align);
+
+  @return $align;
+}
+
+@mixin b-fx-place-content($main-axis, $cross-axis) {
+  $main-axis: parse-align($main-axis);
+  $cross-axis: parse-align($cross-axis);
+
+  &.b-fx,
+  &.b-fx-col {
+    align-items: $cross-axis;
+    justify-content: $main-axis;
+  }
+}
+@mixin z-fx-gap($gap) {
+  $gap: #{$gap}px;
+
+  &.b-fx {
+    > * + * {
+      margin-left: $gap;
+    }
+  }
+
+  &.b-fx-col {
+    > * + * {
+      margin-top: $gap;
+    }
+  }
+}
+
+.b-fx,
+.b-fx-row {
+  display: flex;
+
+  > .b-fx-auto,
+  > .b-fx-grow {
+    min-width: 0;
+  }
+}
+
+.b-fx-inline {
+  display: inline-flex;
+}
+
+.b-fx-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+
+  > .b-fx-auto,
+  > .b-fx-grow {
+    min-height: 0;
+  }
+}
+
+$main-align: start, center, end, around, between, baseline;
+$cross-align: append($main-align, stretch);
+
+@each $main in $main-align {
+  @each $cross in $cross-align {
+    .b-fx-#{$main}-#{$cross} {
+      @include b-fx-place-content($main, $cross);
+    }
+  }
+}
+
+$max-gap: 128;
+
+.b-fx-gap-4 {
+  @include z-fx-gap(4);
+}
+
+@for $i from 1 through $max-gap / 8 {
+  .b-fx-gap-#{$i * 8} {
+    @include z-fx-gap($i * 8);
+  }
+}
+
+// Flex Child
+
+@mixin b-fx-flex($flex) {
+  flex: $flex;
+}
+
+.b-fx-grow {
+  @include b-fx-flex(1 1 100%);
+}
+
+.b-fx-flex {
+  @include b-fx-flex(1 1 0%);
+}
+
+.b-fx-flex-2 {
+  @include b-fx-flex(2 1 0%);
+}
+
+.b-fx-auto {
+  @include b-fx-flex(1 1 auto);
+}
+
+.b-fx-none {
+  @include b-fx-flex(0 0 auto);
+}
+
+.b-fx-no-shrink {
+  @include b-fx-flex(1 0 auto);
+}
+
+.b-fx-no-grow,
+.b-fx-initial {
+  @include b-fx-flex(0 1 0%);
+}
+
+.b-fx-fill {
+  @include b-fx-flex(1 1 auto);
+
+  &.b-fx {
+    width: 100%;
+  }
+
+  &.b-fx-col {
+    height: 100%;
+  }
+}
+
+$flex-align: start center end baseline stretch;
+
+@each $align in $flex-align {
+  .b-fx-flex-#{$align} {
+    align-self: parse-align($align);
+  }
+}

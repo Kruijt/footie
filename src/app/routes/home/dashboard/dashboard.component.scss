@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+
+@use 'core/theme' as *;
+
+:host {
+  height: 100%;
+}
+
+.logo {
+  width: 124px;
+  margin-bottom: 32px;
+}

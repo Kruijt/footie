@@ -1,0 +1,34 @@
+@use '@angular/material' as mat;
+
+@use 'core/theme' as *;
+
+:host {
+  height: 100%;
+}
+
+.login {
+  height: 100%;
+
+  @media only screen and (max-width: 650px) {
+    flex-direction: column;
+  }
+
+  &-icon {
+    padding: 16px;
+    img {
+      height: 124px;
+    }
+  }
+
+  &-window {
+    width: 350px;
+    padding: 64px 32px;
+
+    background-color: mat.get-theme-color($theme, neutral, 20);
+
+    @media only screen and (max-width: 650px) {
+      width: 100%;
+      align-items: center;
+    }
+  }
+}

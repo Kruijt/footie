@@ -1,0 +1,16 @@
+@if (form$ | async; as form) {
+    <div [formGroup]="form" class="settings b-fx-col b-fx-gap-16">
+        <div class="mat-title-large">Settings</div>
+
+        <div class="b-fx-col b-fx-gap-16">
+            <mat-card formGroupName="general">
+                <mat-card-header>
+                    <mat-card-title class="mat-title-small"> General </mat-card-title>
+                </mat-card-header>
+                <mat-card-content> </mat-card-content>
+            </mat-card>
+
+            <button mat-raised-button color="primary" (click)="save(form)">Save</button>
+        </div>
+    </div>
+}

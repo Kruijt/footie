@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+
+@use 'core/theme' as *;
+
+html {
+  scrollbar-color: mat.get-theme-color($theme, neutral-variant, 90) transparent;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+
+  &-track {
+    background: transparent;
+  }
+
+  &-thumb {
+    background: mat.get-theme-color($theme, neutral-variant, 90);
+
+    &:hover {
+      background: mat.get-theme-color($theme, neutral-variant, 70);
+    }
+  }
+}

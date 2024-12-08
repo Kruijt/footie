@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+@use 'core/theme' as *;
+
+@include mat.elevation-classes();
+@include mat.app-background();
+
+html {
+  @include mat.elevation-classes();
+  @include mat.app-background();
+  @include mat.form-field-theme($theme);
+  @include mat.input-theme($theme);
+  @include mat.button-theme($theme);
+  @include mat.fab-theme($theme);
+  @include mat.card-theme($theme);
+  @include mat.dialog-theme($theme);
+  @include mat.select-theme($theme);
+  @include mat.option-theme($theme);
+  @include mat.progress-bar-theme($theme);
+  @include mat.snack-bar-theme($theme);
+  @include mat.sidenav-theme($theme);
+  @include mat.toolbar-theme($theme);
+  @include mat.list-theme($theme);
+  @include mat.divider-theme($theme);
+  @include mat.menu-theme($theme);
+  @include mat.slide-toggle-theme($theme);
+}
