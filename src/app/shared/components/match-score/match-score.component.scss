@@ -1,0 +1,26 @@
+@use '@angular/material' as mat;
+@use 'core/theme' as *;
+
+.match {
+  width: fit-content;
+}
+
+.home-won {
+  .home {
+    font-weight: 800;
+  }
+
+  .away {
+    color: mat.get-theme-color($theme, neutral, 70);
+  }
+}
+
+.away-won {
+  .away {
+    font-weight: 600;
+  }
+
+  .home {
+    color: mat.get-theme-color($theme, neutral, 70);
+  }
+}

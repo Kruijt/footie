@@ -1,0 +1,30 @@
+@use '@angular/material' as mat;
+
+@use 'core/theme' as *;
+
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  max-width: 150px;
+  white-space: nowrap;
+}
+
+.active {
+  .mat-mdc-cell {
+    background-color: mat.get-theme-color($theme, neutral, 30),
+  }
+}
+
+@media only screen and (max-width: 675px) {
+  .mat-mdc-cell,
+  .mat-mdc-header-cell {
+    padding: 0 8px;
+  }
+}
+
+@media only screen and (max-width: 475px) {
+  .mat-mdc-cell,
+  .mat-mdc-header-cell {
+    max-width: 100px;
+    padding: 0 6px;
+  }
+}

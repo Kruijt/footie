@@ -2,11 +2,50 @@
 
 @use 'core/theme' as *;
 
-:host {
-  height: 100%;
+
+.cards {
+  width: 100%;
+  max-width: 800px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  padding: 16px 8px;
 }
 
-.logo {
-  width: 124px;
-  margin-bottom: 32px;
+.rank {
+  font-size: 12px;
+  width: 20px;
+  color: mat.get-theme-color($theme, neutral, 50),
+}
+
+.card-row {
+  width: 100%;
+}
+
+.mat-mdc-card {
+  flex: 1;
+}
+
+.mat-mdc-card-content {
+  padding-top: 16px;
+}
+
+.mat-divider {
+  height: 16px;
+}
+
+@media only screen and (max-width: 675px) {
+  .card-row {
+    flex-direction: column;
+
+    .mat-mdc-card {
+      margin-left: 0;
+
+      + .mat-mdc-card {
+        margin-top: 16px;
+      }
+    }
+  }
 }

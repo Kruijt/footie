@@ -23,7 +23,7 @@ export class GoogleButtonComponent {
     signInWithPopup(this.auth, new GoogleAuthProvider()).then((user) => {
       console.log('User signed in with Google:', user);
 
-      this.router.navigate(['search']);
+      this.router.navigate(['dashboard']);
     });
   }
 }

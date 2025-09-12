@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  justify-content: center;
+}
+
+.setup {
+  width: 300px;
+  margin-top: 24px;
+}
+
+.setup-button {
+  position: relative;
+
+  button {
+    width: 100%;
+  }
+
+  mat-spinner {
+    position: absolute;
+    right: -20px;
+    top: calc(50% - 8px);
+  }
+}
+

@@ -1,3 +1,121 @@
-<div class="search b-fx-col b-fx-center-center b-fx-gap-16">
-    <img src="/assets/logo/logo.svg" alt="Footie" class="logo" />
+<div class="cards b-fx-col b-fx-center-center b-fx-gap-16">
+    <div class="card-row">
+        <mat-card>
+            @let teamRanking = mds.teamRanking$ | async;
+            <mat-card-header>
+                <mat-card-title>
+                    <div class="b-fx b-fx-between-center">
+                        <div class="b-fx b-fx-start-center b-fx-gap-4">
+                            @if (teamRanking?.rank) {
+                                <span class="rank">#{{ teamRanking?.rank }}</span>
+                            }
+                            <span>
+                                {{ (tds.userTeam$ | async)?.name }}
+                            </span>
+
+                            @if (teamRanking) {
+                                <f-match-last-5 [ranking]="teamRanking" />
+                            }
+                        </div>
+
+                        <button mat-icon-button [matMenuTriggerFor]="teamMenu">
+                            <mat-icon>more_horiz</mat-icon>
+
+                            <mat-menu #teamMenu>
+                                <button mat-menu-item (click)="onDownloadCalendar()">
+                                    <mat-icon>event</mat-icon>
+
+                                    <span>Download Team Calendar</span>
+                                </button>
+                            </mat-menu>
+                        </button>
+                    </div>
+                </mat-card-title>
+                <mat-card-subtitle>
+                    <div class="b-fx b-fx-start-center b-fx-gap-4">
+                        <mat-icon>elderly</mat-icon>
+                        <span>
+                            {{ (uds.userData$ | async)?.name }}
+                        </span>
+                    </div>
+                </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content></mat-card-content>
+        </mat-card>
+    </div>
+
+    <div class="card-row b-fx b-fx-gap-16 b-fx-flex">
+        @let lastMatch = mds.lastMatch$ | async;
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    <div class="b-fx b-fx-start-center b-fx-gap-4">
+                        <span> Previous match </span>
+                    </div>
+                </mat-card-title>
+
+                @if (lastMatch) {
+                    <mat-card-subtitle>
+                        <f-match-header [match]="lastMatch" />
+                    </mat-card-subtitle>
+                }
+            </mat-card-header>
+
+            <mat-card-content>
+                @if (lastMatch) {
+                    <f-match-score [match]="lastMatch" />
+                }
+            </mat-card-content>
+        </mat-card>
+        <mat-card>
+            @let nextMatch = mds.nextMatch$ | async;
+
+            <mat-card-header>
+                <mat-card-title>
+                    <div class="b-fx b-fx-start-center b-fx-gap-4">
+                        <span> Upcoming match </span>
+                    </div>
+                </mat-card-title>
+
+                @if (nextMatch) {
+                    <mat-card-subtitle>
+                        <f-match-header [match]="nextMatch" />
+                    </mat-card-subtitle>
+                }
+            </mat-card-header>
+
+            <mat-card-content>
+                @if (nextMatch) {
+                    <f-match-score [match]="nextMatch" />
+                }
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <!--    <div class="card-row">-->
+    <!--        <mat-card>-->
+    <!--            <mat-card-header>-->
+    <!--                <mat-card-title> Team top scorer </mat-card-title>-->
+    <!--            </mat-card-header>-->
+
+    <!--            <mat-card-content></mat-card-content>-->
+    <!--        </mat-card>-->
+    <!--    </div>-->
+
+    <div class="card-row">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title> Current ranking </mat-card-title>
+
+                <mat-card-subtitle> League {{ tds.userTeamLeague$ | async }} </mat-card-subtitle>
+            </mat-card-header>
+
+            <mat-card-content>
+                @if (mds.leagueRankings$ | async; as leagueRankings) {
+                    <f-league-ranking [leagueRankings]="leagueRankings" [team]="tds.userTeam$ | async" />
+                }
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

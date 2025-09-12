@@ -1,0 +1,18 @@
+@if (match(); as match) {
+    <div class="b-fx b-fx-start-center b-fx-gap-8">
+        <div class="b-fx b-fx-start-center">
+            <mat-icon>timer</mat-icon>
+            <span>
+                {{ match.time | date: 'dd-MM-yy@HH:mm' }}
+            </span>
+        </div>
+
+        <div class="b-fx b-fx-start-center">
+            <mat-icon>distance</mat-icon>
+
+            <span>
+                {{ match.location }}
+            </span>
+        </div>
+    </div>
+}

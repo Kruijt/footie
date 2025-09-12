@@ -5,7 +5,7 @@ import { initGuard } from '../core/guards/init.guard';
 export const appRoutes: Routes = [
   {
     path: '',
-    canActivate: [initGuard],
+    canActivateChild: [initGuard],
     children: [
       {
         path: '',
@@ -20,7 +20,11 @@ export const appRoutes: Routes = [
               },
               {
                 path: 'settings',
-                loadComponent: () => import('./home/settings/settings.component').then((c) => c.SettingsComponent),
+                loadComponent: () => import('./home/setup/setup.component').then((c) => c.SetupComponent),
+              },
+              {
+                path: 'setup',
+                loadComponent: () => import('./home/setup/setup.component').then((c) => c.SetupComponent),
               },
             ],
           },

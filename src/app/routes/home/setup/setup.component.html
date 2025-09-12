@@ -1,0 +1,60 @@
+@if (setupForm$ | async; as setupForm) {
+    <form
+        ngForm
+        class="setup b-fx-col b-fx-stretch-center b-fx-gap-16"
+        [formGroup]="setupForm"
+        (ngSubmit)="onSubmit(setupForm)"
+    >
+        <mat-form-field>
+            <mat-icon matPrefix>elderly</mat-icon>
+
+            <mat-label>Your name</mat-label>
+
+            <input formControlName="name" matInput />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-icon matPrefix>email</mat-icon>
+
+            <mat-label>Email</mat-label>
+
+            <input formControlName="email" matInput type="email" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-icon matPrefix>groups</mat-icon>
+
+            <mat-label>Select your team</mat-label>
+
+            <mat-select formControlName="team">
+                @for (team of ts.teams$ | async; track team.id) {
+                    <mat-option [value]="team.id">
+                        {{ team.name }}
+                    </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-icon matPrefix>add_alert</mat-icon>
+
+            <mat-label>What notifications would you like?</mat-label>
+
+            <mat-select formControlName="notifications" multiple>
+                @for (notificationType of notificationTypes; track notificationType) {
+                    <mat-option [value]="notificationType">
+                        {{ notificationTypeLabel[notificationType] }}
+                    </mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <div class="setup-button">
+            <button type="submit" mat-raised-button [disabled]="!setupForm.valid">Proceed</button>
+
+            @if (submitting()) {
+                <mat-spinner mode="indeterminate" diameter="16" />
+            }
+        </div>
+    </form>
+}

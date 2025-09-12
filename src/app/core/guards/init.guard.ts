@@ -1,11 +1,14 @@
-import { map } from 'rxjs';
+import { map, of, switchMap } from 'rxjs';
 
 import { inject } from '@angular/core';
 import { Auth, User, user } from '@angular/fire/auth';
 import { ActivatedRouteSnapshot, RedirectCommand, Router } from '@angular/router';
+import { UserDbService } from '../services/database/user/user-db.service';
+import { take } from 'rxjs/operators';
 
 export function initGuard(route: ActivatedRouteSnapshot) {
   const router = inject(Router);
+  const udb = inject(UserDbService);
 
   let childRoute = route;
   while (childRoute.firstChild) {
@@ -13,18 +16,28 @@ export function initGuard(route: ActivatedRouteSnapshot) {
   }
 
   const path = childRoute.url.map((segment) => segment.path).join('/');
+  const isOnLogin = path.startsWith('login');
+  const isOnSetup = path.startsWith('setup');
 
   return user(inject(Auth)).pipe(
-    map((user: User) => {
+    switchMap((user: User | null) => {
       const isLoggedIn = !!user;
-      const isOnLogin = path.startsWith('login');
 
-      if ((isLoggedIn && isOnLogin) || path === '') {
-        return new RedirectCommand(router.createUrlTree(['search']), { replaceUrl: true });
-      } else if (!isLoggedIn && !isOnLogin) {
-        return new RedirectCommand(router.createUrlTree(['login']), { replaceUrl: true });
+      if (isLoggedIn) {
+        return udb.userData$.pipe(
+          take(1),
+          map((userData) => {
+            if (!userData?.team) {
+              return isOnSetup ? of(true) : new RedirectCommand(router.createUrlTree(['setup']), { replaceUrl: true });
+            } else {
+              return isOnLogin || isOnSetup || path === ''
+                ? new RedirectCommand(router.createUrlTree(['dashboard']), { replaceUrl: true })
+                : of(true);
+            }
+          }),
+        );
       } else {
-        return true;
+        return isOnLogin ? of(true) : of(new RedirectCommand(router.createUrlTree(['login']), { replaceUrl: true }));
       }
     }),
   );

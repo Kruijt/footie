@@ -12,42 +12,42 @@ import { AsyncPipe } from '@angular/common';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
-    selector: 'f-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    imports: [
-        RouterOutlet,
-        MatSidenavContainer,
-        MatSidenav,
-        MatSidenavContent,
-        MatToolbar,
-        MatIconButton,
-        MatIcon,
-        MatNavList,
-        MatListItemIcon,
-        MatListItemTitle,
-        RouterLinkActive,
-        MatDivider,
-        MatListItem,
-        RouterLink,
-        MatDivider,
-        AsyncPipe,
-        MatMenuTrigger,
-        MatMenu,
-        MatMenuItem,
-    ]
+  selector: 'f-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    RouterOutlet,
+    MatSidenavContainer,
+    MatSidenav,
+    MatSidenavContent,
+    MatToolbar,
+    MatIconButton,
+    MatIcon,
+    MatNavList,
+    MatListItemIcon,
+    MatListItemTitle,
+    RouterLinkActive,
+    MatDivider,
+    MatListItem,
+    RouterLink,
+    MatDivider,
+    AsyncPipe,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
+  ],
 })
 export class HomeComponent {
   private auth: Auth = inject(Auth);
 
-  readonly user$: Observable<User> = user(this.auth);
+  private router: Router = inject(Router);
+
+  readonly user$: Observable<User | null> = user(this.auth);
 
   readonly avatar$ = this.user$.pipe(map((user) => user?.photoURL));
 
   protected sidenavOpen = false;
-
-  constructor(private router: Router) {}
 
   onLogout(): void {
     this.auth.signOut().then(() => this.router.navigate(['login']));

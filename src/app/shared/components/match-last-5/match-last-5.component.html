@@ -1,0 +1,17 @@
+<div class="b-fx b-fx-start-center b-fx-gap-4">
+    @for (result of ranking().last5; track $index) {
+        <mat-icon [ngClass]="'result-' + result">
+            @switch (result) {
+                @case (MatchResult.Won) {
+                    check_circle
+                }
+                @case (MatchResult.Draw) {
+                    circle
+                }
+                @case (MatchResult.Lost) {
+                    cancel
+                }
+            }
+        </mat-icon>
+    }
+</div>

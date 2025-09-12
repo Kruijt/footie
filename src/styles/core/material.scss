@@ -1,9 +1,6 @@
 @use '@angular/material' as mat;
 @use 'core/theme' as *;
 
-@include mat.elevation-classes();
-@include mat.app-background();
-
 html {
   @include mat.elevation-classes();
   @include mat.app-background();
@@ -12,6 +9,11 @@ html {
   @include mat.button-theme($theme);
   @include mat.fab-theme($theme);
   @include mat.card-theme($theme);
+  @include mat.card-overrides((
+    subtitle-text-color: mat.get-theme-color($theme, neutral, 50),
+    subtitle-text-size: 14px,
+    elevated-container-color: mat.get-theme-color($theme, neutral, 20),
+  ));
   @include mat.dialog-theme($theme);
   @include mat.select-theme($theme);
   @include mat.option-theme($theme);
@@ -23,4 +25,6 @@ html {
   @include mat.divider-theme($theme);
   @include mat.menu-theme($theme);
   @include mat.slide-toggle-theme($theme);
+  @include mat.divider-theme($theme);
+  @include mat.table-theme($theme);
 }

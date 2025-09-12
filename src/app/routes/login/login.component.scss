@@ -15,6 +15,8 @@
 
   &-icon {
     padding: 16px;
+    background-color: mat.get-theme-color($theme, neutral, 10);
+
     img {
       height: 124px;
     }
@@ -30,5 +32,13 @@
       width: 100%;
       align-items: center;
     }
+  }
+
+  .mat-title-medium {
+    color: mat.get-theme-color($theme, neutral, 100);
+  }
+
+  .mat-title-small {
+    color: mat.get-theme-color($theme, neutral, 50);
   }
 }
