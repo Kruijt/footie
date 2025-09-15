@@ -10,9 +10,9 @@ import { AsyncPipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { MatCard, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle } from '@angular/material/card';
 
-import { TeamsStorageService } from '../../../core/services/database/teams/teams-storage.service';
+import { TeamsStorageService } from '../../../core/services/database/core/storage/teams/teams-storage.service';
 import { UserDbService } from '../../../core/services/database/user/user-db.service';
-import { MatchesStorageService } from '../../../core/services/database/matches/matches-storage.service';
+import { MatchesStorageService } from '../../../core/services/database/core/storage/matches/matches-storage.service';
 import { MatchScoreComponent } from '../../../shared/components/match-score/match-score.component';
 import { MatchHeaderComponent } from '../../../shared/components/match-header/match-header.component';
 import { LeagueRankingComponent } from '../../../shared/components/league-ranking/league-ranking.component';

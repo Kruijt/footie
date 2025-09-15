@@ -2,9 +2,9 @@ import { defer, map, Observable, of, shareReplay, switchMap } from 'rxjs';
 
 import { inject, Injectable } from '@angular/core';
 
-import { Team } from '../../../../shared/models/teams.models';
-import { UserDbService } from '../user/user-db.service';
-import { StorageService } from '../core/storage/storage.service';
+import { Team } from '../../../../../../shared/models/teams.models';
+import { UserDbService } from '../../../user/user-db.service';
+import { StorageService } from '../storage.service';
 
 @Injectable({
   providedIn: 'root',

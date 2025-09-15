@@ -2,11 +2,11 @@ import { map, Observable, of, shareReplay, switchMap } from 'rxjs';
 
 import { inject, Injectable } from '@angular/core';
 
-import { Match } from '../../../../shared/models/matches.models';
-import { League, LeagueRanking } from '../../../../shared/models/leagues.models';
+import { Match } from '../../../../../../shared/models/matches.models';
+import { League, LeagueRanking } from '../../../../../../shared/models/leagues.models';
 import { TeamsStorageService } from '../teams/teams-storage.service';
-import { StorageService } from '../core/storage/storage.service';
-import { matchesToRanking } from '../../../../shared/utilities/league.utilities';
+import { StorageService } from '../storage.service';
+import { matchesToRanking } from '../../../../../../shared/utilities/league.utilities';
 
 @Injectable({
   providedIn: 'root',

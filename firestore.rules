@@ -2,20 +2,44 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /leagues/{leagueId} {
-      allow read;
-    }
-    match /matches/{matchId} {
-      allow read;
-    }
-    match /teams/{teamId} {
-      allow read;
-    }
     match /{document=**} {
       allow read, write: if false;
     }
+
+    function isSignedIn() {
+      return request.auth != null && request.auth.uid != null;
+    }
+
+    function getUserTeam(userId) {
+      let userData = isSignedIn() ? get(/databases/$(database)/documents/users/$(request.auth.uid)).data : null;
+
+      return userData != null ? userData.team : null;
+    }
+
+    function getUserTeamRights(teamId, userId) {
+      let teamRights = isSignedIn() ? get(/databases/$(database)/documents/teams/$(teamId)/rights/$(userId)).data : null;
+
+      return teamRights != null ? teamRights.value : 0;
+    }
+
+    function getRightsValue(rightId) {
+      let rights = get(/databases/$(database)/documents/rights/$(rightId)).data;
+
+      return rights != null ? rights.value : 0;
+    }
+
+    match /teams/{teamId} {
+      allow read: if isSignedIn() && getUserTeam(request.auth.uid) == teamId;
+      allow write: if isSignedIn() && getUserTeamRights(teamId, request.auth.uid) >= getRightsValue('teamAdmin');
+    }
+
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if isSignedIn() && resource.data != null && getUserTeam(request.auth.uid) == resource.data.team
+      allow write: if isSignedIn() && request.auth.uid == userId;
+    }
+
+    match /rights/{rightId} {
+      allow read: if isSignedIn();
     }
   }
 }

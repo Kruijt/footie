@@ -16,19 +16,19 @@
                             @if (teamRanking) {
                                 <f-match-last-5 [ranking]="teamRanking" />
                             }
+
+                            <button class="mat-primary" mat-icon-button [matMenuTriggerFor]="teamMenu">
+                                <mat-icon>more_horiz</mat-icon>
+
+                                <mat-menu #teamMenu>
+                                    <button mat-menu-item (click)="onDownloadCalendar()">
+                                        <mat-icon>event</mat-icon>
+
+                                        <span>Download Team Calendar</span>
+                                    </button>
+                                </mat-menu>
+                            </button>
                         </div>
-
-                        <button mat-icon-button [matMenuTriggerFor]="teamMenu">
-                            <mat-icon>more_horiz</mat-icon>
-
-                            <mat-menu #teamMenu>
-                                <button mat-menu-item (click)="onDownloadCalendar()">
-                                    <mat-icon>event</mat-icon>
-
-                                    <span>Download Team Calendar</span>
-                                </button>
-                            </mat-menu>
-                        </button>
                     </div>
                 </mat-card-title>
                 <mat-card-subtitle>

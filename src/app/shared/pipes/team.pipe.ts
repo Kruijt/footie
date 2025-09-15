@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { inject, Pipe, PipeTransform } from '@angular/core';
 
 import { Team } from '../models/teams.models';
-import { TeamsStorageService } from '../../core/services/database/teams/teams-storage.service';
+import { TeamsStorageService } from '../../core/services/database/core/storage/teams/teams-storage.service';
 
 @Pipe({
   name: 'team',

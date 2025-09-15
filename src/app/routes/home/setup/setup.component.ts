@@ -12,7 +12,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
 
-import { TeamsStorageService } from '../../../core/services/database/teams/teams-storage.service';
+import { TeamsStorageService } from '../../../core/services/database/core/storage/teams/teams-storage.service';
 import { NotificationType, notificationTypeLabel } from '../../../shared/models/notifications.models';
 import { UserDbService } from '../../../core/services/database/user/user-db.service';
 
