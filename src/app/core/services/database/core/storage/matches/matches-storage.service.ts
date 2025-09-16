@@ -52,13 +52,13 @@ export class MatchesStorageService extends StorageService {
     shareReplay(1),
   );
 
-  readonly lastMatch$: Observable<Match | void> = this.teamMatches$.pipe(
-    map((matches) => matches.reverse().find((match) => match.time < Date.now())),
+  readonly lastMatch$: Observable<Match | void> = this.playedMatches$.pipe(
+    map((matches) => matches[matches.length - 1]),
     shareReplay(1),
   );
 
-  readonly nextMatch$: Observable<Match | void> = this.teamMatches$.pipe(
-    map((matches) => matches.find((match) => match.time > Date.now())),
+  readonly nextMatch$: Observable<Match | void> = this.upcomingTeamMatches$.pipe(
+    map((matches) => matches[0]),
     shareReplay(1),
   );
 
