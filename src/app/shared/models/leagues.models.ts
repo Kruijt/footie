@@ -15,5 +15,6 @@ export interface LeagueRanking {
   goalsFor: number;
   goalsAgainst: number;
   points: number;
+  matchDetails: Match[];
   last5: [MatchResult?, MatchResult?, MatchResult?, MatchResult?];
 }

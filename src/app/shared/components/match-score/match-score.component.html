@@ -1,28 +1,28 @@
 <div class="match b-fx b-fx-gap-4 b-fx-center-center" [class.home-won]="homeWon()" [class.away-won]="awayWon()">
-    <div class="b-fx b-fx-start-center b-fx-gap-4">
+    <div class="b-fx b-fx-start-center b-fx-gap-4 name-wrapper">
         @if (homeWon()) {
-            <mat-icon>sports_soccer</mat-icon>
+            <mat-icon class="b-fx-none">sports_soccer</mat-icon>
         }
-        <div class="home">{{ (match().homeTeam | team | async)?.name }}</div>
+        <div class="home name">{{ (match().homeTeam | team | async)?.name }}</div>
     </div>
 
     <div class="b-fx-col b-fx-center-center b-fx-gap-8">
         @if (scoreAwayTeam() >= 0 && scoreHomeTeam() >= 0) {
-            <div class="score b-fx b-fx-center-center b-fx-gap-4">
-                <div class="">{{ match().scoreHomeTeam }}</div>
+            <div class="score b-fx b-fx-center-center b-fx-gap-4 b-fx-none">
+                <div>{{ match().scoreHomeTeam }}</div>
                 <span>-</span>
-                <div class="">{{ match().scoreAwayTeam }}</div>
+                <div>{{ match().scoreAwayTeam }}</div>
             </div>
         } @else {
-            <mat-icon>sports_soccer</mat-icon>
+            <mat-icon class="b-fx-none">sports_soccer</mat-icon>
         }
     </div>
 
-    <div class="b-fx b-fx-start-center b-fx-gap-4">
-        <div class="away">{{ (match().awayTeam | team | async)?.name }}</div>
+    <div class="b-fx b-fx-start-center b-fx-gap-4 name-wrapper">
+        <div class="away name">{{ (match().awayTeam | team | async)?.name }}</div>
 
         @if (awayWon()) {
-            <mat-icon>sports_soccer</mat-icon>
+            <mat-icon class="b-fx-none">sports_soccer</mat-icon>
         }
     </div>
 </div>

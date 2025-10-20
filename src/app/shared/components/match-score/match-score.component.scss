@@ -1,8 +1,24 @@
 @use '@angular/material' as mat;
 @use 'core/theme' as *;
 
+:host {
+  display: block;
+  overflow: hidden;
+}
+
 .match {
   width: fit-content;
+  max-width: 100%;
+}
+
+.name-wrapper {
+  overflow: hidden;
+}
+
+.name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .home-won {

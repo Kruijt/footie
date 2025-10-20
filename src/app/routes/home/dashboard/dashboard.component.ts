@@ -49,6 +49,8 @@ export class DashboardComponent {
   readonly tds = inject(TeamsStorageService);
   readonly mds = inject(MatchesStorageService);
 
+  onEditTeam(): void {}
+
   onDownloadCalendar(): void {
     combineLatest([this.mds.upcomingTeamMatches$, this.tds.teams$])
       .pipe(take(1))

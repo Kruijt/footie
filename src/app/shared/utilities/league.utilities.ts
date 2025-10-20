@@ -11,6 +11,9 @@ export const matchesToRanking = (matches: Match[]): LeagueRanking[] =>
         addMatchToRankings([homeTeamRanking, awayTeamRanking], match);
       }
 
+      homeTeamRanking.matchDetails.push(match);
+      awayTeamRanking.matchDetails.push(match);
+
       if (!ranking.includes(homeTeamRanking)) {
         ranking.push(homeTeamRanking);
       }
@@ -46,12 +49,14 @@ export const getDefaultRanking = (team: string): LeagueRanking => {
     goalsAgainst: 0,
     points: 0,
     last5: [],
+    matchDetails: [],
   };
 };
 
 export const addMatchToRankings = ([homeRanking, awayRanking]: [LeagueRanking, LeagueRanking], match: Match): void => {
   const scoreHomeTeam = match.scoreHomeTeam ?? 0;
   const scoreAwayTeam = match.scoreAwayTeam ?? 0;
+
   addResultToRanking(homeRanking, scoreHomeTeam, scoreAwayTeam);
   addResultToRanking(awayRanking, scoreAwayTeam, scoreHomeTeam);
 };

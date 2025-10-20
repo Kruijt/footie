@@ -2,10 +2,23 @@
 
 @use 'core/theme' as *;
 
+:host {
+  display: block;
+  overflow: auto;
+}
+
+.mat-mdc-row,
+.mat-mdc-header-row {
+}
+
 .mat-mdc-cell,
 .mat-mdc-header-cell {
-  max-width: 150px;
+  min-width: 25px;
   white-space: nowrap;
+}
+
+.mat-column-team {
+  max-width: 250px;
 }
 
 .active {
@@ -14,17 +27,74 @@
   }
 }
 
+.team-row {
+  --mat-table-row-item-outline-width: 0;
+}
+
+.team-matches-wrapper {
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 0fr;
+  grid-template-columns: 100%;
+  transition: grid-template-rows 500ms ease;
+
+  background-color: mat.get-theme-color($theme, neutral, 20);
+  --mat-table-background-color: mat.get-theme-color($theme, neutral, 20);
+  --mat-table-row-item-label-text-size: 0.75rem;
+
+  ::ng-deep {
+    .mdc-data-table__cell {
+      padding: 0 8px;
+    }
+  }
+
+  .played {
+    opacity: 0.5;
+  }
+}
+
+.team-matches {
+  min-height: 0;
+
+  white-space: normal;
+}
+
+.team-matches-list {
+  width: 100%;
+  padding: 8px 0;
+}
+
+.mat-column-team-match-details {
+  padding: 0;
+}
+
+.team-match-details-row {
+  height: 0;
+}
+
+.expanded + .team-match-details-row {
+  .team-matches-wrapper {
+    grid-template-rows: 1fr;
+  }
+}
+
+.mat-column-date {
+  width: 50px;
+}
+
 @media only screen and (max-width: 675px) {
-  .mat-mdc-cell,
-  .mat-mdc-header-cell {
-    padding: 0 8px;
+  .mat-column-team,
+  .mat-column-homeTeam,
+  .mat-column-awayTeam {
+    max-width: 150px;
   }
 }
 
 @media only screen and (max-width: 475px) {
-  .mat-mdc-cell,
-  .mat-mdc-header-cell {
+
+  .mat-column-team,
+  .mat-column-homeTeam,
+  .mat-column-awayTeam  {
     max-width: 100px;
-    padding: 0 6px;
   }
 }

@@ -21,10 +21,10 @@
                                 <mat-icon>more_horiz</mat-icon>
 
                                 <mat-menu #teamMenu>
-                                    <button mat-menu-item (click)="onDownloadCalendar()">
-                                        <mat-icon>event</mat-icon>
+                                    <button mat-menu-item [disabled]="" (click)="onEditTeam()">
+                                        <mat-icon>family_restroom</mat-icon>
 
-                                        <span>Download Team Calendar</span>
+                                        <span>Edit team</span>
                                     </button>
 
                                     <button mat-menu-item (click)="onDownloadCalendar()">

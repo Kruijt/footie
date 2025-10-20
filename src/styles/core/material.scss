@@ -28,4 +28,5 @@ html {
   @include mat.slide-toggle-theme($theme);
   @include mat.divider-theme($theme);
   @include mat.table-theme($theme);
+  @include mat.ripple-theme($theme);
 }

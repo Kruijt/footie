@@ -31,11 +31,6 @@ export class MatchesStorageService extends StorageService {
     shareReplay(1),
   );
 
-  readonly playedMatches$: Observable<Match[]> = this.allMatches$.pipe(
-    map((matches) => matches.filter((match) => match.scoreHomeTeam != null && match.scoreAwayTeam != null)),
-    shareReplay(1),
-  );
-
   readonly teamMatches$ = this.tdb.userTeam$.pipe(
     switchMap((team) =>
       team?.id
@@ -47,22 +42,27 @@ export class MatchesStorageService extends StorageService {
     shareReplay(1),
   );
 
+  readonly playedTeamMatches$: Observable<Match[]> = this.teamMatches$.pipe(
+    map((matches) => matches.filter((match) => match.scoreHomeTeam != null && match.scoreAwayTeam != null)),
+    shareReplay(1),
+  );
+
   readonly upcomingTeamMatches$: Observable<Match[]> = this.teamMatches$.pipe(
     map((matches) => matches.filter((match) => match.scoreHomeTeam == null && match.scoreAwayTeam == null)),
     shareReplay(1),
   );
 
-  readonly lastMatch$: Observable<Match | void> = this.playedMatches$.pipe(
+  readonly lastMatch$: Observable<Match | void> = this.playedTeamMatches$.pipe(
     map((matches) => matches[matches.length - 1]),
     shareReplay(1),
   );
 
   readonly nextMatch$: Observable<Match | void> = this.upcomingTeamMatches$.pipe(
-    map((matches) => matches[0]),
+    map((matches) => matches.find((match) => match.time > Date.now())),
     shareReplay(1),
   );
 
-  readonly leagueRankings$: Observable<LeagueRanking[]> = this.playedMatches$.pipe(
+  readonly leagueRankings$: Observable<LeagueRanking[]> = this.allMatches$.pipe(
     map((matches) => matchesToRanking(matches)),
     shareReplay(1),
   );

@@ -3,3 +3,8 @@ export interface Team {
   name: string;
   league: string;
 }
+
+export interface TeamPlayer {
+  id: string;
+  name: string;
+}
