@@ -55,7 +55,7 @@
 }
 
 .mat-column-team-match-details {
-  padding: 0;
+  padding: 0 !important;
 
   background-color: mat.get-theme-color($theme, neutral, 20);
 }
