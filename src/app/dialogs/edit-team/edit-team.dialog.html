@@ -1,0 +1,53 @@
+@if (teamForm(); as teamForm) {
+<form ngForm [formGroup]="teamForm" class="b-fx-col b-fx-gap-8">
+    <mat-form-field>
+        <mat-icon matPrefix>groups</mat-icon>
+
+        <mat-label>Team name</mat-label>
+
+        <input formControlName="name" matInput />
+    </mat-form-field>
+
+    <div class="b-fx-col b-fx-gap-8">
+        <div>Players</div>
+
+        <mat-list formArrayName="players">
+            @for (player of playerFormArray().controls; track player.value.id) {
+            <mat-list-item [formGroup]="player">
+                <div class="b-fx b-fx-between-center">
+                    <span> {{ player.value.name }} </span>
+
+                    <button type="button" mat-icon-button class="alert" (click)="deletePlayer(player.value.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </mat-list-item>
+            }
+        </mat-list>
+
+        <div class="new">
+            <mat-form-field>
+                <mat-icon matPrefix>elderly</mat-icon>
+
+                <mat-label>New player</mat-label>
+
+                <input formControlName="newPlayer" matInput />
+
+                <button matSuffix mat-icon-button (click)="addPlayer()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <button
+        class="b-fx-flex-end"
+        mat-raised-button
+        type="button"
+        [disabled]="teamForm.invalid"
+        (click)="onSubmitForm()"
+    >
+        Save
+    </button>
+</form>
+}

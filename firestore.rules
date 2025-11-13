@@ -18,9 +18,11 @@ service cloud.firestore {
     }
 
     function getUserTeamRights(teamId, userId) {
-      let teamRights = isSignedIn() ? get(/databases/$(database)/documents/teams/$(teamId)/players/$(userId)).data : null;
+      let teamExists = isSignedIn() ? exists(/databases/$(database)/documents/teams/$(teamId)) : false;
+     	let playerData = teamExists ? get(/databases/$(database)/documents/teams/$(teamId)/players/$(userId)).data : null;
+      let teamRights = playerData != null && playerData.rights != null ? get(playerData.rights).data : null;
 
-      return teamRights != null ? teamRights.rights : 0;
+      return teamRights != null ? teamRights.value : 0;
     }
 
     function getRightsValue(rightId) {
@@ -30,6 +32,11 @@ service cloud.firestore {
     }
 
     match /teams/{teamId} {
+      allow read: if isSignedIn() && getUserTeam(request.auth.uid) == teamId;
+      allow write: if isSignedIn() && getUserTeamRights(teamId, request.auth.uid) >= getRightsValue('teamAdmin');
+    }
+
+    match /teams/{teamId}/players/{playerId} {
       allow read: if isSignedIn() && getUserTeam(request.auth.uid) == teamId;
       allow write: if isSignedIn() && getUserTeamRights(teamId, request.auth.uid) >= getRightsValue('teamAdmin');
     }

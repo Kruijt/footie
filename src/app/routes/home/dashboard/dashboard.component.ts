@@ -4,7 +4,7 @@ import { combineLatest } from 'rxjs';
 import ical, { ICalCalendarMethod } from 'ical-generator';
 
 import { Component, inject } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AsyncPipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
@@ -19,6 +19,9 @@ import { LeagueRankingComponent } from '../../../shared/components/league-rankin
 import { MatchLast5Component } from '../../../shared/components/match-last-5/match-last-5.component';
 import { MatIconButton } from '@angular/material/button';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { EditTeamDialog } from '../../../dialogs/edit-team/edit-team.dialog';
+import { TeamDbService } from '../../../core/services/database/team/team-db.service';
+import { TopScorersComponent } from '../../../shared/components/top-scorers/top-scorers.component';
 
 @Component({
   selector: 'f-dashboard',
@@ -42,14 +45,19 @@ import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
     MatMenuTrigger,
     MatMenu,
     MatMenuItem,
+    TopScorersComponent,
   ],
 })
 export class DashboardComponent {
+  readonly md = inject(MatDialog);
   readonly uds = inject(UserDbService);
+  readonly td = inject(TeamDbService);
   readonly tds = inject(TeamsStorageService);
   readonly mds = inject(MatchesStorageService);
 
-  onEditTeam(): void {}
+  onEditTeam(): void {
+    this.md.open(EditTeamDialog);
+  }
 
   onDownloadCalendar(): void {
     combineLatest([this.mds.upcomingTeamMatches$, this.tds.teams$])

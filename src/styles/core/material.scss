@@ -2,31 +2,18 @@
 @use 'core/theme' as *;
 
 html {
+  @include mat.theme($team-properties);
+  @include mat.dialog-theme($team-properties);
+  @include mat.button-theme($team-properties);
+  @include mat.form-field-theme($team-properties);
   @include mat.elevation-classes();
   @include mat.app-background();
-  @include mat.form-field-theme($theme);
-  @include mat.input-theme($theme);
-  @include mat.button-theme($theme);
-  @include mat.icon-button-theme($theme);
-  @include mat.fab-theme($theme);
-  @include mat.card-theme($theme);
+  @include mat.expansion-overrides((
+    container-elevation-shadow: none
+  ));
   @include mat.card-overrides((
     subtitle-text-color: mat.get-theme-color($theme, neutral, 50),
     subtitle-text-size: 14px,
     elevated-container-color: mat.get-theme-color($theme, neutral, 20),
   ));
-  @include mat.dialog-theme($theme);
-  @include mat.select-theme($theme);
-  @include mat.option-theme($theme);
-  @include mat.progress-bar-theme($theme);
-  @include mat.snack-bar-theme($theme);
-  @include mat.sidenav-theme($theme);
-  @include mat.toolbar-theme($theme);
-  @include mat.list-theme($theme);
-  @include mat.divider-theme($theme);
-  @include mat.menu-theme($theme);
-  @include mat.slide-toggle-theme($theme);
-  @include mat.divider-theme($theme);
-  @include mat.table-theme($theme);
-  @include mat.ripple-theme($theme);
 }

@@ -108,6 +108,7 @@ export function safeKey(key: string): string {
     '[',
     ']',
     '/',
+    ' ',
     '\\',
     ...Array.from(Array(32))
       .map((_, i) => i)

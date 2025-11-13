@@ -14,5 +14,6 @@ import { LeagueRanking } from '../../models/leagues.models';
 })
 export class MatchLast5Component {
   readonly ranking = input.required<LeagueRanking>();
+
   protected readonly MatchResult = MatchResult;
 }

@@ -1,0 +1,14 @@
+@use '@angular/material' as mat;
+@use 'core/colors' as colors;
+
+.alert {
+  @include mat.icon-button-overrides((
+  icon-color: colors.$alert
+  ))
+}
+
+.success {
+  @include mat.icon-button-overrides((
+  icon-color: colors.$success
+  ))
+}

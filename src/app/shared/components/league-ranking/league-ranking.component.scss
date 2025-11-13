@@ -7,24 +7,53 @@
   overflow: auto;
 }
 
+.mat-mdc-table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 .mat-mdc-cell,
 .mat-mdc-header-cell {
   min-width: 25px;
   white-space: nowrap;
+
+  transition: background-color 400ms ease;
 }
 
 .mat-column-team {
   max-width: 250px;
 }
 
-.active {
-  .mat-mdc-cell {
-    background-color: mat.get-theme-color($theme, neutral, 30),
-  }
-}
 
 .team-row {
   --mat-table-row-item-outline-width: 0;
+  --mat-table-row-item-outline-color: mat.get-theme-color($theme, neutral, 0);
+
+  cursor: pointer;
+
+  &.active {
+    .mat-mdc-cell {
+      background-color: mat.get-theme-color($theme, neutral, 25);
+    }
+  }
+
+  &.expanded {
+    .mat-mdc-cell {
+      background-color: mat.get-theme-color($theme, neutral, 20);
+    }
+
+    + .team-match-details-row {
+      .team-matches-wrapper {
+        grid-template-rows: 1fr;
+      }
+    }
+  }
+
+  &:hover {
+    .mat-mdc-cell {
+      background-color: mat.get-theme-color($theme, neutral, 30);
+    }
+  }
 }
 
 .team-matches-wrapper {
@@ -62,12 +91,6 @@
 
 .team-match-details-row {
   height: 0;
-}
-
-.expanded + .team-match-details-row {
-  .team-matches-wrapper {
-    grid-template-rows: 1fr;
-  }
 }
 
 .mat-column-date,

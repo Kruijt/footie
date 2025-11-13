@@ -23,7 +23,7 @@ import { TemplateVariables } from 'mailtrap/dist/types/mailtrap';
 initializeApp();
 
 export const syncDataService = onSchedule(
-  { schedule: '0 15 */3 * *', maxInstances: 1, region: 'europe-west1', invoker: 'private' },
+  { schedule: '0 14 * * *', maxInstances: 1, region: 'europe-west1', invoker: 'private' },
   async () => {
     const matchPageData = new JSDOM((await axios.get('https://www.zvvdebevelanden.nl/speelschema/')).data);
     const matchPage = matchPageData.window.document;

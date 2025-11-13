@@ -5,10 +5,12 @@ import { Auth, User, user } from '@angular/fire/auth';
 import { ActivatedRouteSnapshot, RedirectCommand, Router } from '@angular/router';
 import { UserDbService } from '../services/database/user/user-db.service';
 import { take } from 'rxjs/operators';
+import { TeamDbService } from '../services/database/team/team-db.service';
 
 export function initGuard(route: ActivatedRouteSnapshot) {
   const router = inject(Router);
   const udb = inject(UserDbService);
+  const tdb = inject(TeamDbService);
 
   let childRoute = route;
   while (childRoute.firstChild) {

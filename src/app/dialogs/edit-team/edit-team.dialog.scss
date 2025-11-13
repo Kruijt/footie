@@ -1,0 +1,13 @@
+:host {
+  display: block;
+  padding: 24px;
+}
+
+.new {
+  padding: 0 16px;
+}
+
+mat-list {
+  max-height: 50vh;
+  overflow: auto;
+}

@@ -1,0 +1,15 @@
+.mat-expansion-panel-header {
+  white-space: nowrap;
+}
+
+.mat-column-ranking {
+  width: 50px;
+}
+
+.mat-column-goals {
+  width: 100px;
+}
+
+:host ::ng-deep .mat-expansion-panel-body {
+  padding: 0;
+}

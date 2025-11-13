@@ -18,7 +18,7 @@ export abstract class FirestoreService {
   readonly fs = inject(Firestore);
 
   getCollection<T extends DocumentData>(path: string): Observable<T[]> {
-    return collectionData(collection(this.fs, path)).pipe(
+    return collectionData(collection(this.fs, path), { idField: 'id' }).pipe(
       map((data) => (Array.isArray(data) ? data : []) as T[]),
       shareReplay({ bufferSize: 1, refCount: true }),
     );
